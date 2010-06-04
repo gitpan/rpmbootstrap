@@ -1,0 +1,6 @@
+# $Id$
+
+RPMBOOTSTRAP CHANGES
+
+0.9.9 (2010-04-29)
+- First version of the rpmbootstrap program based on debootstrap and rinse ideas (Bruno Cornec)

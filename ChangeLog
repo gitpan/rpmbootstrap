@@ -1,0 +1,82 @@
+2010-04-29  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1018] Creation of
+	  svn+ssh://svn.project-builder.org/mondo/svn/pb///0.9.9 from
+	  svn+ssh://svn.project-builder.org/mondo/svn/pb//devel
+
+2010-04-28  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1015] Fixes to support ia64 chroot with centos5
+
+2010-04-12  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1005] - Project-Builder.org is licensed under the GPL v2 for
+	  the moment.
+
+2010-03-03  Bruno Cornec <bruno@project-builder.org>
+
+	* [r993] r3719@localhost: bruno | 2010-03-03 19:10:43 +0100
+	  - Improvements for mandriva chroot. GPG check still not working
+	* [r992] r3713@localhost: bruno | 2010-03-02 23:13:29 +0100
+	  - Adds support for mandriva in rpmbootstrap - Not finished yet.
+	  chroot should be able to call urpmi
+
+2010-03-01  Bruno Cornec <bruno@project-builder.org>
+
+	* [r991] r3711@localhost: bruno | 2010-03-01 07:29:29 +0100
+	  - veconf => rbsconf
+	  - Adds option -a to rpmbootstrap in order for pb to automatically
+	  install the packages it needs
+	  - Check CentOS4 VE OK
+	  - Adds pb.conf man page to spec build
+
+2010-02-24  Bruno Cornec <bruno@project-builder.org>
+
+	* [r990] r3709@localhost: bruno | 2010-02-22 22:05:32 +0100
+	  - First addition of OpenSUSE support in rpmbootstrap
+
+2010-02-23  Bruno Cornec <bruno@project-builder.org>
+
+	* [r988] r3704@localhost: bruno | 2010-02-22 00:35:17 +0100
+	  - Updated pb.conf configuration (mostly done)
+	  - vetmout removed
+	* [r987] r3703@localhost: bruno | 2010-02-21 07:08:00 +0100
+	  - verebuild non mandatory, cleanup + doc
+	  - vepkglist => vemindep
+	  - pb.conf doc again continued
+
+2010-02-21  Bruno Cornec <bruno@project-builder.org>
+
+	* [r986] r3700@localhost: bruno | 2010-02-20 16:35:59 +0100
+	  - Continue to improve pb.conf documentation
+	  - veconf renamed as rbsconf
+	  - ve4pi renamed rbs4pi
+	  - new pb_get_postinstall generic function for rinse and
+	  rpmbootstrap
+	  - ventp/vmntp is now optional
+	  - licom_err needed by fedora 12
+	  - make rpmbootstrap work for i386 distros
+
+2010-02-20  Bruno Cornec <bruno@project-builder.org>
+
+	* [r984] - Fix fedora 12: now installing in VE with rpmbootstrap
+	  - First fully rpmbootstrap working version. Now needs more
+	  testing with other fedora versions, and opensuse/mandriva
+	  adaptation
+	* [r983] - rpmbootstrap good up to package name identification
+	  - fedora-12 package list updated
+
+2010-02-19  Bruno Cornec <bruno@project-builder.org>
+
+	* [r982] - Fix variable substitution which was too aggressive in
+	  pb_distro_get_param
+	* [r981] - Adds some notes for package signing
+	  - Fix syntax for rpmbootstrap + build process
+	* [r980] - Fix more naming issues
+	* [r977] - Adds the Makefile.PL required for rpmbootstrap
+	* [r976] - First preliminary version of rpmboostrap
+	* [r974] - Adds function pb_check_requirements and use it in pb
+	  - Adds some conf params for rpmbootstrap in conf file
+	  - pb_distro_get_param now can expand some variables before
+	  returning a value
+
