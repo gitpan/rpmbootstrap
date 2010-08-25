@@ -261,6 +261,31 @@ if (! $response->is_success) {
 }
 pb_log(3,"Mirror $mirror gave answer: ".Dumper($response->dump(maxlength => 0))."\n");
 
+# Try to find where the repodata structure is for later usage
+my $repo = $mirror;
+my $found = 0;
+if ($pbupd =~ /yum/) {
+	my $response1;
+	while ($found == 0) {
+		$response1 = $ua->get("$repo/repodata");
+		if (! $response1->is_success) {
+			$repo = dirname($repo);
+
+			pb_log(2,"REPO analyzed: $repo\n");
+			# There is a limit to the loop, when / is reached and nothing found
+			my ($scheme, $account, $host, $port, $path) = pb_get_uri($repo);
+			die "Unable to find the repodata structure of the mirror $mirror\nPlease check the URL or warn the dev team.\n" if ($path =~ /^[\/]+$/);
+			
+			# / not reached, so looping
+			next;
+		} else {
+			# repodata found $repo is correct
+			$found = 1;
+			last;
+		}
+	}
+}
+
 # Manages architectures specificities
 my $parch = $darch;
 $parch = "i[3456]86" if ($darch eq "i386");
@@ -410,13 +435,14 @@ pb_system("mount -o bind /proc $vepath/proc","Mounting /proc");
 # Some devices may be needed
 #
 pb_mkdir_p("$vepath/dev");
+chmod 0755,"$vepath/dev";
 pb_system("mknod -m 644 $vepath/dev/random c 1 8","Creating $vepath/dev/random") if (! -c "$vepath/dev/random");
 pb_system("mknod -m 644 $vepath/dev/urandom c 1 9","Creating $vepath/dev/urandom") if (! -c "$vepath/dev/urandom");
 pb_system("mknod -m 666 $vepath/dev/zero c 1 5","Creating $vepath/dev/zero") if (! -c "$vepath/dev/zero");
 
 my $minipkglist;
 
-pb_log(1,"Adapting $osupdname repository entries");
+pb_log(1,"Adapting $osupdname repository entries\n");
 if ($pbupd =~ /yum/) {
 	#
 	# Force the architecture for yum
@@ -431,7 +457,7 @@ if ($pbupd =~ /yum/) {
 		pb_system("sed -i -e 's/\$releasever/$dver/g' $i","","quiet");
 		pb_system("sed -i -e 's/^mirrorlist/#mirrorlist/' $i","","quiet");
 		# rather use neutral separators here
-		pb_system("sed -i -e 's|^#baseurl.*\$|baseurl=$mirror|' $i","","quiet");
+		pb_system("sed -i -e 's|^#baseurl.*\$|baseurl=$repo|' $i","","quiet");
 	}
 	$minipkglist = "ldconfig yum passwd vim-minimal dhclient authconfig";
 } elsif ($pbupd =~ /zypper/) {

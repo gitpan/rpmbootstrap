@@ -6,7 +6,7 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     NAME         => 'rpmbootstrap',
     DISTNAME     => 'rpmbootstrap',
-    VERSION      => '0.9.9',
+    VERSION      => '0.9.10',
     INST_SCRIPT  => 'blib/bin',
 	INSTALLDIRS  => 'perl',
     PREREQ_PM    => {

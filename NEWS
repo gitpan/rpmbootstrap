@@ -2,5 +2,12 @@
 
 RPMBOOTSTRAP CHANGES
 
-0.9.9 (2010-04-29)
+0.9.10 (2010-06-07)
+- Add support for Ubuntu 10.04 natively and with debootstrap (universe repo needed) (Bruno Cornec)
+- Project-Builder.org is licensed under the GPL v2 for the moment. (Bruno Cornec)
+- Adds rbsopt parameter + doc to allow for passing options to rpmbootstrap such as -k now by default. (Bruno Cornec)
+- Successful tests with some VE (Mandriva 2009.1 and 2010.0, CentOS 4 & 5, Fedora 12, Ubuntu 10.04, Debian 5) (Bruno Cornec)
+- The repodata dir is now search in the parents dir of the mirror given as it depends on yum version. (Bruno Cornec)
+
+0.9.9 (2010-05-01)
 - First version of the rpmbootstrap program based on debootstrap and rinse ideas (Bruno Cornec)
