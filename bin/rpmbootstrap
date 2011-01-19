@@ -34,17 +34,22 @@ rpmbootstrap - creates a chrooted RPM based distribution a la debootstrap, aka V
 
 =head1 DESCRIPTION
 
-rpmbootstrap creates a chroot environment (Virtual Environment or VE) with a minimal distribution in it,
-suited for building packages for example. It's very much like debootstrap but for RPM based distribution. 
-It aims at supporting all distributions supported by project-builder;org (RHEL, RH, Fedora, OpeSUSE, SLES, Mandriva, ...)
+rpmbootstrap creates a chroot environment (Virtual Environment or VE) 
+with a minimal distribution in it, suited for building packages for example. 
+It's very much like debootstrap but for RPM based distribution. 
+It aims at supporting all distributions supported by project-builder.org 
+(RHEL, RH, Fedora, OpeSUSE, SLES, Mandriva, ...)
 
-It is inspired by work done by Steve Kemp for rinse (http://www.steve.org.uk/), and similar to mock, but fully integrated with project-builder.org (which also supports rinse and mock).
+It is inspired by work done by Steve Kemp for rinse (http://www.steve.org.uk/), 
+and similar to mock, but fully integrated with project-builder.org 
+(which also supports rinse and mock).
 
 =head1 SYNOPSIS
 
 rpmbootstrap [-vhmqpdk][-s script][-i iso][-a pkg1[,pkg2,...]] distribution-version-arch [target-dir] [mirror [script]]
 
-pb [--verbose][--help][--man][--quiet][--print-rpms][--download-only][--keep][--add pkg1,[pkg2,...]][--script script][--iso iso] distribution-version-arch [target-dir] [mirror [script]]
+rpmbootstrap [--verbose][--help][--man][--quiet][--print-rpms][--download-only]
+[--keep][--script script][--iso iso][--add pkg1,[pkg2,...]] distribution-version-arch [target-dir] [mirror [script]]
 
 =head1 OPTIONS
 
@@ -68,8 +73,10 @@ Do not print any output.
 
 =item B<-p|--print-rpms>
 
-Print the packages to be installed, and exit. Note that a target directory must be specified so
-rpmbootstrap can determine which packages should be installed, and to resolve dependencies. The target directory will be deleted.
+Print the packages to be installed, and exit. 
+Note that a target directory must be specified so rpmbootstrap can determine 
+which packages should be installed, and to resolve dependencies. 
+The target directory will be deleted.
 
 =item B<-d|--download-only>
 
@@ -82,7 +89,8 @@ Keep packages in the cache dir for later reuse. By default remove them.
 =item B<-s|--script script>
 
 Name of the script you want to execute on the related VEs after the installation.
-It is executed in host environment. You can use the chroot command to execute actions in the VE.
+It is executed in host environment. 
+You can use the chroot command to execute actions in the VE.
 
 =item B<-i|--iso iso_image>
 
@@ -90,11 +98,14 @@ Name of the ISO image of the distribution you want to install on the related VE.
 
 =item B<-a|--add pkg1[,pkg2,...]>
 
-Additional packages to add from the distribution you want to install on the related VE at the end of the chroot build.
+Additional packages to add from the distribution you want to install on the related VE 
+at the end of the chroot build.
 
 =back 
 
 =head1 ARGUMENTS
+
+=over 4 
 
 =item B<distribution-version-arch>
 
@@ -102,7 +113,12 @@ Full name of the distribution that needs to be installed in the VE. E.g. fedora-
 
 =item B<target-dir>
 
-This is the target directory under which the VE will be created. Created on the fly if needed. If none is given use the default directory hosting VE for project-builder.org (Cf: vepath parameter in $HOME/.pbrc)
+This is the target directory under which the VE will be created. 
+Created on the fly if needed. 
+If none is given use the default directory hosting VE for project-builder.org 
+(Cf: vepath parameter in $HOME/.pbrc)
+
+=back 
 
 =head1 EXAMPLE
 
@@ -110,14 +126,15 @@ To setup a Fedora 12 distribution with an i386 architecture issue:
 
 rpmbootstrap fedora-12-i386 /tmp/fedora/12/i386
 
-
 =head1 WEB SITES
 
-The main Web site of the project is available at L<http://www.project-builder.org/>. Bug reports should be filled using the trac instance of the project at L<http://trac.project-builder.org/>.
+The main Web site of the project is available at L<http://www.project-builder.org/>. 
+Bug reports should be filled using the trac instance of the project at L<http://trac.project-builder.org/>.
 
 =head1 USER MAILING LIST
 
-Cf: L<http://www.mondorescue.org/sympa/info/pb-announce> for announces and L<http://www.mondorescue.org/sympa/info/pb-devel> for the development of the pb project.
+Cf: L<http://www.mondorescue.org/sympa/info/pb-announce> for announces and 
+L<http://www.mondorescue.org/sympa/info/pb-devel> for the development of the pb project.
 
 =head1 CONFIGURATION FILE
 
@@ -198,7 +215,7 @@ die "Needs to be run as root" if ($EFFECTIVE_USER_ID != 0);
 pb_log(0,"Starting VE build for $ENV{'PBV'}\n");
 my ($name,$ver,$darch) = split(/-/,$ENV{'PBV'});
 chomp($darch);
-my ($ddir, $dver, $dfam, $dtype, $pbsuf, $pbupd) = pb_distro_init($name,$ver,$darch);
+my ($ddir, $dver, $dfam, $dtype, $dos, $pbsuf, $pbupd, $pbins) = pb_distro_init($name,$ver,$darch);
 
 #
 # Check target dir
@@ -211,10 +228,7 @@ my $vepath = shift @ARGV;
 # Check for command requirements
 #
 my ($req,$opt) = pb_conf_get_if("oscmd","oscmdopt");
-my ($req2,$opt2) = (undef,undef);
-$req2 = $req->{$appname} if (defined $req);
-$opt2 = $opt->{$appname} if (defined $opt);
-pb_check_requirements($req2,$opt2);
+pb_check_requirements($req,$opt,$appname);
 
 if (not defined $vepath) {
 	my ($vestdpath) = pb_conf_get_if("vepath");
@@ -264,7 +278,7 @@ pb_log(3,"Mirror $mirror gave answer: ".Dumper($response->dump(maxlength => 0)).
 # Try to find where the repodata structure is for later usage
 my $repo = $mirror;
 my $found = 0;
-if ($pbupd =~ /yum/) {
+if ($pbins =~ /yum/) {
 	my $response1;
 	while ($found == 0) {
 		$response1 = $ua->get("$repo/repodata");
@@ -316,7 +330,7 @@ my $oscachedir = "/tmp";
 my $osupdcachedir;
 my $osupdname = "";
 
-if ($pbupd =~ /yum/) {
+if ($pbins =~ /yum/) {
 	$oscachedir = "$vepath/var/cache/yum/core/packages/";
 	$osupdcachedir = "$vepath/var/cache/yum/updates-released/packages/";
 	$osupdname = "YUM";
@@ -326,10 +340,10 @@ if ($pbupd =~ /yum/) {
 		$osupdcachedir = "$vepath/var/cache/yum/$darch/$dver/updates/packages";
 		$osupdcachedir = "$vepath/var/cache/yum/updates-released/packages/";
 	}
-} elsif ($pbupd =~ /zypper/) {
+} elsif ($pbins =~ /zypper/) {
 	$oscachedir = "$vepath/var/cache/zypp/packages/opensuse/suse/$darch";
 	$osupdname = "Zypper";
-} elsif ($pbupd =~ /urpmi/) {
+} elsif ($pbins =~ /urpmi/) {
 	$oscachedir = "$vepath/var/cache/urpmi/rpms";
 	$osupdname = "URPMI";
 }
@@ -400,7 +414,7 @@ if ($opts{'p'}) {
 pb_log(0,"VE post configuration\n");
 
 # yum needs that distro-release package be installed, so force it
-if ($pbupd =~ /yum/) {
+if ($pbins =~ /yum/) {
 	foreach my $p1 (<$cachedir/($ddir|redhat)-release-*.rpm>) {
 		copy("$cachedir/$p1","$vepath/tmp");
 		pb_system("chroot $vepath rpm -ivh --force --nodeps /tmp/$p1","Forcing RPM installation of $p1");
@@ -443,7 +457,7 @@ pb_system("mknod -m 666 $vepath/dev/zero c 1 5","Creating $vepath/dev/zero") if 
 my $minipkglist;
 
 pb_log(1,"Adapting $osupdname repository entries\n");
-if ($pbupd =~ /yum/) {
+if ($pbins =~ /yum/) {
 	#
 	# Force the architecture for yum
 	# The goal is to allow i386 chroot on x86_64
@@ -460,7 +474,7 @@ if ($pbupd =~ /yum/) {
 		pb_system("sed -i -e 's|^#baseurl.*\$|baseurl=$repo|' $i","","quiet");
 	}
 	$minipkglist = "ldconfig yum passwd vim-minimal dhclient authconfig";
-} elsif ($pbupd =~ /zypper/) {
+} elsif ($pbins =~ /zypper/) {
 	pb_mkdir_p("$vepath/etc/zypp/repos.d");
 	open(REPO,"> $vepath/etc/zypp/repos.d/$ddir-$dver") || die "Unable to create repo file";
 	my $baseurl = dirname(dirname($mirror));
@@ -479,7 +493,7 @@ EOF
 	if ($dver eq "10.2") {
 		pb_system("chroot $vepath /bin/bash -c \"yes | /usr/bin/zypper sa $baseurl $ddir-$dver\"","Bootstrapping Zypper");
 	}
-} elsif ($pbupd =~ /urpmi/) {
+} elsif ($pbins =~ /urpmi/) {
 	# Setup the repo
 	my $baseurl = dirname(dirname(dirname($mirror)));
 	pb_system("chroot $vepath /bin/bash -c \"urpmi.addmedia --distrib $baseurl\"","Bootstrapping URPMI");
@@ -490,8 +504,8 @@ EOF
 # Run "install the necessary modules".
 # No need for sudo here
 #
-$pbupd =~ s/sudo//g;
-pb_system("chroot $vepath /bin/bash -c \"$pbupd $minipkglist \"","Bootstrapping OS by running $pbupd $minipkglist");
+$pbins =~ s/sudo//g;
+pb_system("chroot $vepath /bin/bash -c \"$pbins $minipkglist \"","Bootstrapping OS by running $pbins $minipkglist");
 
 #
 # make 'passwd' work.
@@ -502,14 +516,14 @@ pb_system("chroot $vepath /bin/bash -c \"if [ -x /usr/bin/authconfig ]; then /us
 # Installed additional packages we were asked to
 if (defined $opts{'a'}) {
 	$opts{'a'} =~ s/,/ /g;
-	pb_system("chroot $vepath /bin/bash -c \"$pbupd $opts{'a'} \"","Adding packages to OS by running $pbupd $opts{'a'}");
+	pb_system("chroot $vepath /bin/bash -c \"$pbins $opts{'a'} \"","Adding packages to OS by running $pbins $opts{'a'}");
 }
 
 #
 # Clean up
 #
 pb_log(1,"Cleaning up\n");
-if ($pbupd =~ /yum/) {
+if ($pbins =~ /yum/) {
 	pb_system("chroot $vepath /usr/bin/yum clean all","Cleaning yum");
 }
 pb_system("umount $vepath/proc","Unmounting /proc");
@@ -528,5 +542,3 @@ sub unlink_old_conf {
 	unlink($_) if ($_ =~ /\.rpmorig$/);
 	unlink($_) if ($_ =~ /\.rpmnew$/);
 }
-
-

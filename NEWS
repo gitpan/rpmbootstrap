@@ -2,6 +2,15 @@
 
 RPMBOOTSTRAP CHANGES
 
+0.10.1 (2011-01-13)
+- Adds fedora 14 support for rpmbootstrap (Bruno Cornec)
+- Improve Fedora 13 VE support (Bruno Cornec)
+- rpmboostrap now uses pb_check_req (Bruno Cornec)
+- Remove most lintian warnings for Debian (Bruno Cornec)
+- Fix Mandriva 2010.1 VE built with right dep pkg list (Bruno Cornec)
+- various rpmlint and lintian fixes (Bruno Cornec)
+- Adds ebuild version for pb gentoo packages (Bruno Cornec)
+
 0.9.10 (2010-06-07)
 - Add support for Ubuntu 10.04 natively and with debootstrap (universe repo needed) (Bruno Cornec)
 - Project-Builder.org is licensed under the GPL v2 for the moment. (Bruno Cornec)

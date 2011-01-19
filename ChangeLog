@@ -1,8 +1,52 @@
-2010-06-07  Bruno Cornec <bruno@project-builder.org>
+2011-01-15  Bruno Cornec <bruno@project-builder.org>
 
-	* [r1040] Creation of
-	  svn+ssh://svn.project-builder.org/mondo/svn/pb///0.9.10 from
+	* [r1162] Creation of
+	  svn+ssh://svn.project-builder.org/mondo/svn/pb///0.10.1 from
 	  svn+ssh://svn.project-builder.org/mondo/svn/pb//devel
+
+2010-12-21  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1128] - pb_check_requirements now takes direct result from
+	  pb_conf_get_if and does more internal work, which ease caller.
+	* [r1127] - Modify pb_check_req interface to return the found value
+	  and allow direct call
+	  - Use pb_check_req to avoid some hardcoded path
+
+2010-11-18  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1111] - Rename previous option osupd into the more correct
+	  osins, and add a real osupd param to support distribution update
+	  commands
+	  - Adds 2 new commands to update distributions in VM|VE with
+	  updatevm|ve (Fix #70)
+
+2010-08-09  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1082] - Remove most lintian warnings for Debian upload
+
+2010-07-25  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1078] - Fix an issue in VE setup with the new delivery variable
+	  (forgot indirection)
+	  - Fix Mandriva 2010.1 VE built with right dep pkg list
+	* [r1074] - Adds rbsdeplist for Mandriva 2010.1 VE
+
+2010-06-27  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1064] r3931@dhcp184-49-175-19: bruno | 2010-06-26 08:02:59
+	  +0200
+	  - Adds the notion of os at the top in order to provide an even
+	  better tuple management
+
+2010-06-13  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1052] r3866@localhost: bruno | 2010-06-09 23:43:23 +0200
+	  - Add support for LSB 3.2
+
+2010-06-08  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1044] - First attempt to improve Web site delivery for docs
+	  (man pages, ...)
 
 2010-05-22  Bruno Cornec <bruno@project-builder.org>
 
