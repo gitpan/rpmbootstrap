@@ -2,6 +2,11 @@
 
 RPMBOOTSTRAP CHANGES
 
+0.11.1 (2011-02-26)
+- rpmbootstrap wasn't using the right conf file when launched with sudo is fixed by using the SUDO_USER env. var.
+- pb.conf rbsmirrorsrv now uses pbos var, and is filtered correctly. (Bruno Cornec)
+- Introduction of a new hash $pbos to manage all os related info through a single data structure. All functions reviewed accordingly. Externally transparent, hopefully, but much cleaner code as a consequence. (Bruno Cornec)
+
 0.10.1 (2011-01-13)
 - Adds fedora 14 support for rpmbootstrap (Bruno Cornec)
 - Improve Fedora 13 VE support (Bruno Cornec)

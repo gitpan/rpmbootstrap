@@ -1,8 +1,25 @@
-2011-01-15  Bruno Cornec <bruno@project-builder.org>
+2011-02-26  Bruno Cornec <bruno@project-builder.org>
 
-	* [r1162] Creation of
-	  svn+ssh://svn.project-builder.org/mondo/svn/pb///0.10.1 from
-	  svn+ssh://svn.project-builder.org/mondo/svn/pb//devel
+	* [r1230] Creation of
+	  svn+ssh://svn.project-builder.org/prj/svn/pb///0.11.1 from
+	  svn+ssh://svn.project-builder.org/prj/svn/pb//devel
+
+2011-02-12  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1181] - Fix rpmbootstrap and pb newve order, which wasn't
+	  working after the latest pbos introduction
+	  - rpmbootstrap wasn't using the right conf file when launched
+	  with sudo is fixed by using the SUDO_USER env. var.
+	  - pb.conf rbsmirrorsrv now uses pbos var, and is filtered
+	  correctly.
+
+2011-02-07  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1177] r4161@eelzbach2: bruno | 2011-02-06 21:07:30 +0100
+	  - Introduction of a new hash $pbos to manage all os related info
+	  through a single data structure. All functions reviewed
+	  accordingly. Externally transparent, hopefully, but much cleaner
+	  code as a consequence. VM/VE/RM remains to be tested.
 
 2010-12-21  Bruno Cornec <bruno@project-builder.org>
 
