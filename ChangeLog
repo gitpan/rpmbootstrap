@@ -1,8 +1,15 @@
-2011-02-26  Bruno Cornec <bruno@project-builder.org>
+2011-03-12  Bruno Cornec <bruno@project-builder.org>
 
-	* [r1230] Creation of
-	  svn+ssh://svn.project-builder.org/prj/svn/pb///0.11.1 from
+	* [r1265] Creation of
+	  svn+ssh://svn.project-builder.org/prj/svn/pb///0.11.2 from
 	  svn+ssh://svn.project-builder.org/prj/svn/pb//devel
+
+2011-03-11  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1254] - Adds mdkonline as a dependency for Mandriva VE builds
+	  (at least afetr 2010.1) to have urpmi.update
+	* [r1253] - Try to be more error proof when issues with repository
+	  download
 
 2011-02-12  Bruno Cornec <bruno@project-builder.org>
 

@@ -278,19 +278,20 @@ if ($pbos->{'install'} =~ /yum/) {
 	my $response1;
 	while ($found == 0) {
 		$response1 = $ua->get("$repo/repodata");
+		pb_log(2,"REPO analyzed: $repo\n");
 		if (! $response1->is_success) {
 			$repo = dirname($repo);
 
-			pb_log(2,"REPO analyzed: $repo\n");
 			# There is a limit to the loop, when / is reached and nothing found
 			my ($scheme, $account, $host, $port, $path) = pb_get_uri($repo);
-			die "Unable to find the repodata structure of the mirror $mirror\nPlease check the URL or warn the dev team.\n" if ($path =~ /^[\/]+$/);
+			die "Unable to find the repodata structure of the mirror $mirror\nPlease check the URL or warn the dev team.\n" if (($path =~ /^[\/]+$/) || ($path =~ /^$/));
 		
 			# / not reached, so looping
 			next;
 		} else {
 			# repodata found $repo is correct
 			$found = 1;
+			pb_log(2,"REPO found: $repo\n");
 			last;
 		}
 	}
@@ -525,8 +526,6 @@ if ($pbos->{'install'} =~ /yum/) {
 }
 pb_system("umount $vepath/proc","Unmounting /proc");
 find(\&unlink_old_conf, $vepath);
-
-# Add additional packages if asked for
 
 # Executes post-install step if asked for
 if ($opts{'s'}) {

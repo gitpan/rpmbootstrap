@@ -2,8 +2,14 @@
 
 RPMBOOTSTRAP CHANGES
 
+0.11.2 (2011-03-12)
+- Try to be more error proof when issues with repository download (Bruno Cornec)
+- Fix rpmbootstrap and pb newve order, which wasn't working after the latest pbos introduction (Bruno Cornec)
+- rpmbootstrap wasn't using the right conf file when launched with sudo is fixed by using the SUDO_USER env. var. (Bruno Cornec)
+- pb.conf rbsmirrorsrv now uses pbos var, and is filtered correctly. (Bruno Cornec)
+
 0.11.1 (2011-02-26)
-- rpmbootstrap wasn't using the right conf file when launched with sudo is fixed by using the SUDO_USER env. var.
+- rpmbootstrap wasn't using the right conf file when launched with sudo is fixed by using the SUDO_USER env. var. (Bruno Cornec)
 - pb.conf rbsmirrorsrv now uses pbos var, and is filtered correctly. (Bruno Cornec)
 - Introduction of a new hash $pbos to manage all os related info through a single data structure. All functions reviewed accordingly. Externally transparent, hopefully, but much cleaner code as a consequence. (Bruno Cornec)
 
