@@ -1,8 +1,14 @@
-2011-03-12  Bruno Cornec <bruno@project-builder.org>
+2011-05-25  Bruno Cornec <bruno@project-builder.org>
 
-	* [r1265] Creation of
-	  svn+ssh://svn.project-builder.org/prj/svn/pb///0.11.2 from
+	* [r1305] Creation of
+	  svn+ssh://svn.project-builder.org/prj/svn/pb///0.11.3 from
 	  svn+ssh://svn.project-builder.org/prj/svn/pb//devel
+
+2011-04-16  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1299] - Working VVE for opensuse-11.4
+	  - some corresponding fixes for rpmbootstrap that would also need
+	  backward checks now
 
 2011-03-11  Bruno Cornec <bruno@project-builder.org>
 

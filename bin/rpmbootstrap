@@ -477,20 +477,21 @@ if ($pbos->{'install'} =~ /yum/) {
 	open(REPO,"> $vepath/etc/zypp/repos.d/$pbos->{'name'}-$pbos->{'version'}") || die "Unable to create repo file";
 	my $baseurl = dirname(dirname($mirror));
 	# Setup the repo
-	print REPO << 'EOF';
-[opensuse]
-name=$pbos->{'name'}-$pbos->{'version'}
-baseurl=$baseurl
-enabled=1
-gpgcheck=1
-
-EOF
-	close(REPO);
-	$minipkglist = "zypper vim-minimal dhclient";
-	# Bootstraping zypper
 	if ($pbos->{'version'} eq "10.2") {
 		pb_system("chroot $vepath /bin/bash -c \"yes | /usr/bin/zypper sa $baseurl $pbos->{'name'}-$pbos->{'version'}\"","Bootstrapping Zypper");
+	} else {
+		pb_system("chroot $vepath /bin/bash -c \"/usr/bin/zypper ar $baseurl $pbos->{'name'}-$pbos->{'version'}\"","Bootstrapping Zypper");
 	}
+	#print REPO << "EOF";
+#[opensuse]
+#name=$pbos->{'name'}-$pbos->{'version'}
+#baseurl=$baseurl
+#enabled=1
+#gpgcheck=1
+#
+#EOF
+	close(REPO);
+	$minipkglist = "zypper";
 } elsif ($pbos->{'install'} =~ /urpmi/) {
 	# Setup the repo
 	my $baseurl = dirname(dirname(dirname($mirror)));

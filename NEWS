@@ -2,6 +2,10 @@
 
 RPMBOOTSTRAP CHANGES
 
+0.11.3 (2011-05-25)
+- Working VE for opensuse-11.4 (Bruno Cornec)
+- some corresponding fixes for rpmbootstrap that would also need backward checks now (Bruno Cornec)
+
 0.11.2 (2011-03-12)
 - Try to be more error proof when issues with repository download (Bruno Cornec)
 - Fix rpmbootstrap and pb newve order, which wasn't working after the latest pbos introduction (Bruno Cornec)
