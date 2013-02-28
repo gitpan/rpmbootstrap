@@ -2,6 +2,28 @@
 
 RPMBOOTSTRAP CHANGES
 
+0.12.2 (2013-02-26)
+- Adds Red Hat 6.2 (not RHEL !) support (Bruno Cornec)
+- Tested with opensuse 12.2 (Bruno Cornec)
+- rpmbootstrap now supports non-yum type of install with a full list of deps. (Bruno Cornec)
+
+0.12.1 (2012-05-28)
+- rpmbootstrap needs aaa_base for VE seyup with zypper, in order to add passwd file e.g. (Bruno Cornec)
+- If we have a proxy defined, write it into /etc/sysconfig/proxy. Otherwise one of the opensuse's doesn't work right. (Eric Anderson)
+- Improve error message, include why the download failed (Eric Anderson)
+- Download files to a temporary name so that ctrl-c won't leave around bad .rpm files. (Eric Anderson)
+- Add support for stop-on-error. (Eric Anderson)
+- Error out if no packages are defined for the OS version since that indicates something is badly wrong. (Eric Anderson)
+- Track the packages that we install so that we can re-install them with the vendor's tool.  (Eric Anderson)
+- Don't mount proc if it is already mounted.  (Eric Anderson)
+- Only process repo files under yum.repos.d. (Eric Anderson)
+- Report on broken packages listed for installation at the end so the warning isn't hidden. (Eric Anderson)
+- Fix rpmbootstrap to support sites with multiple href in their page (opensuse main site e.g) (Bruno Cornec)
+- Fix conf to support VE for opensuse 12.1 (Bruno Cornec)
+- Improved description, documentation and web pages (Eric Anderson)
+- Exit when no mirror defined to build a VE (Bruno Cornec)
+- Fix #105: create /dev/null in the chroot to avoid getting a file with errors in it. (Bruno Cornec)
+
 0.11.3 (2011-05-25)
 - Working VE for opensuse-11.4 (Bruno Cornec)
 - some corresponding fixes for rpmbootstrap that would also need backward checks now (Bruno Cornec)

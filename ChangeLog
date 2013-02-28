@@ -1,8 +1,116 @@
-2011-05-25  Bruno Cornec <bruno@project-builder.org>
+2013-02-26  Bruno Cornec <bruno@project-builder.org>
 
-	* [r1305] Creation of
-	  svn+ssh://svn.project-builder.org/prj/svn/pb///0.11.3 from
+	* [r1697] Creation of
+	  svn+ssh://svn.project-builder.org/prj/svn/pb/0.12.2 from
 	  svn+ssh://svn.project-builder.org/prj/svn/pb//devel
+
+2012-10-21  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1661] - Introduce a pb_exit function and use it in all apps
+
+2012-10-07  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1652] - As Red Hat 6.2 in chroot doesn't support setarch i386
+	  for a x86_64 environment, we have to fake x86_64 rpm build in
+	  /etc/rpmrc
+	  - Red Hat 6.2 builds with the rpm command, not rpmbuild
+	  - Red Hat 6.2 sudo doesn't support the env_keep var, remove it
+
+2012-09-26  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1645] - Adds support for a RedHat 6.2 VE by first making newve
+	  work, and rpmbootstrap support non-yum type of install with a
+	  full list of deps.
+
+2012-05-26  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1603] - pbtest now uses debian-6.0 has the correct distro name
+	  and points to mandriva 2011.0
+	  - pbtest now first umounts potential remaining /proc FS left from
+	  previous run and has a build dep fo deb on gcc
+	  - pb: removes a useless chown in it which was always failing
+	  - Fix errors in mageia deps
+	  - Fix typo in Base.pm
+	  - rpmbootstrap needs aaa_base for VE seyup with zypper, in order
+	  to add passwd file e.g.
+
+2012-05-24  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1595] - pb_system is back to 3 params, as the previously
+	  undocumented "mayfail" 3rd parameter povides what the 4th was
+	  dded for. callers adapted in relationship
+
+2012-05-22  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1564] - Fix typo n rpmbootstrap preventing it to run
+	  - Fix the detection of setarch call with a more correct regexp
+	  - New mageia mirror used (similar as mandriva)
+	  - Add a test script to have a full regression suite before
+	  publishing a new version
+
+2012-05-13  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1534] rpmbootstrap: Add Copyrights specified by HP Open Source
+	  Review Board (Eric Anderson)
+	* [r1533] - rpmbootstrap: If we have a proxy defined, write it into
+	  /etc/sysconfig/proxy. Otherwise one of the opensuse's doesn't
+	  work right. Various hacks to keep the redhat distros from
+	  destroying the nis name of the machine during the install (in
+	  comment). (Eric Anderson)
+	* [r1532] - rpmbootstrap: Improve error message, include why the
+	  download failed (turned out web server was being slow). Strip off
+	  spaces in package names appearing because of multi-line conf file
+	  support. Download files to a temporary name so that ctrl-c won't
+	  leave around bad .rpm files. (Eric Anderson)
+	* [r1531] rpmbootstrap: Add support for stop-on-error. Expand out
+	  VE paths. Error out if no packages are defined for the OS version
+	  since that indicates something is badly wrong. Track the packages
+	  that we install so that we can re-install them with the vendor's
+	  tool. Don't mount proc if it is already mounted. Only process
+	  repo files under yum.repos.d. In comment for now: Include all the
+	  packages installed during bootstrapping in the list of packages
+	  to re-install for yum and zypper. If you don't do this for yum,
+	  you end up with the generic fedora release file which doesn't
+	  match the pattern expected to determine the version. If you don't
+	  do this for zypper, then /etc/passwd isn't created, which creates
+	  failures later. Remove the zypper repository before adding, just
+	  adding fails since it already exists. Hack to fix up the
+	  yum.repos.d files again after the yum install since centos 6
+	  mangles them during install. Report on broken packages listed for
+	  installation at the end so the warning isn't hidden. (Eric
+	  Anderson)
+
+2012-02-26  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1429] - Fix rpmbootstrap to support sites with multiple href in
+	  their page (opensuse main site e.g)
+	  - Fix conf to support VE for opensuse 12.1
+
+2012-02-02  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1402] r4487@cabanilles: bruno | 2012-02-01 16:21:48 +0100
+	  - Fix the -t option without param for pb
+	  - add a function to analyze busybox countent and create
+	  appropriate structure for pbmkbm
+
+2011-07-07  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1326] - Improve rpmbootstrap description thanks to contributors
+	  feedback
+
+2011-06-17  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1315] - Improved documentation and web pages (Eric Anderson
+	  eric.anderson4_at_hp.com)
+
+2011-05-31  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1314] - Exit when no mirror defined to build a VE
+
+2011-05-30  Bruno Cornec <bruno@project-builder.org>
+
+	* [r1309] - Fix #105: create /dev/null in the chroot to avoid
+	  getting a file with errors in it.
 
 2011-04-16  Bruno Cornec <bruno@project-builder.org>
 
